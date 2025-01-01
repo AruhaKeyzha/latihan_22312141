@@ -7,7 +7,9 @@ import 'package:myapp/app/routes/app_pages.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
+  // const LoginView({super.key});
   final cAuth = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,7 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             TextField(
-              controller: controller.cPass,
+              controller: controller.cPassword,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
@@ -45,7 +47,7 @@ class LoginView extends GetView<LoginController> {
               onPressed: () {
                 cAuth.login(
                   controller.cEmail.text,
-                  controller.cPass.text,
+                  controller.cPassword.text,
                 );
               },
               child: Text("Login"),
@@ -61,7 +63,9 @@ class LoginView extends GetView<LoginController> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 child: Text("Reset Password"),
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAllNamed(Routes.RESET_PASSWORD);
+                },
               ),
             ),
             SizedBox(
@@ -78,6 +82,19 @@ class LoginView extends GetView<LoginController> {
                   child: Text("Daftar Disini"),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () => cAuth.LoginGoogle(),
+              //  {},
+
+              child: Text("Login with google"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 105, 150, 34),
+                foregroundColor: Colors.white,
+              ),
             ),
           ],
         ),
